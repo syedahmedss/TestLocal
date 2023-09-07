@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Reminders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    table th,
+    table td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    button {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Update Reminders</h1>
+
+    <form id="dataForm">
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>Meeting Today:</td>
+          <td><input type="number" id="meetingToday"></td>
+        </tr>
+        <tr>
+          <td>Meeting Next Day:</td>
+          <td><input type="number" id="meetingNextDay"></td>
+        </tr>
+        <tr>
+          <td>Visitors Today:</td>
+          <td><input type="number" id="visitorsToday"></td>
+        </tr>
+        <tr>
+          <td>Visitors Next Day:</td>
+          <td><input type="number" id="visitorsNextDay"></td>
+          
+        </tr>
+        <tr>
+          <td>Approvals Today:</td>
+          <td><input type="number" id="approvalsToday"></td>
+        </tr>
+        <tr>
+          <td>Approvals Next Day:</td>
+          <td><input type="number" id="approvalsNextDay"></td>
+        </tr>
+        <tr>
+          <td>SAP Approvals Today:</td>
+          <td><input type="number" id="sapApprovalsToday"></td>
+        </tr>
+        <tr>
+          <td>SAP Approvals Next Day:</td>
+          <td><input type="number" id="sapApprovalsNextDay"></td>
+        </tr>
+      </table>
+
+      <button type="submit">Update Data</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const dataForm = document.getElementById("dataForm");
+
+      dataForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get values from form inputs and set to 0 if empty
+        const meetingToday = Number(document.getElementById("meetingToday").value) || 0;
+        const meetingNextDay = Number(document.getElementById("meetingNextDay").value) || 0;
+        const visitorsToday = Number(document.getElementById("visitorsToday").value) || 0;
+        const visitorsNextDay = Number(document.getElementById("visitorsNextDay").value) || 0;
+        const approvalsToday = Number(document.getElementById("approvalsToday").value) || 0;
+        const approvalsNextDay = Number(document.getElementById("approvalsNextDay").value) || 0;
+        const sapApprovalsToday = Number(document.getElementById("sapApprovalsToday").value) || 0;
+        const sapApprovalsNextDay = Number(document.getElementById("sapApprovalsNextDay").value) || 0;
+
+        // Create an object with the updated data
+        const updatedData = [
+          {
+            "MeetingToday": meetingToday,
+            "MeetingNextDay": meetingNextDay,
+            "VisitorsToday": visitorsToday,
+            "VisitorsNextDay": visitorsNextDay,
+            "ApprovalsToday": approvalsToday,
+            "ApprovalsNextDay": approvalsNextDay,
+    "SAPApprovalsToday": sapApprovalsToday,
+            "SAPApprovalsNextDay": sapApprovalsNextDay
+          }
+        ];
+
+        // Store the updated data in local storage
+        localStorage.setItem("ReminderData", JSON.stringify(updatedData));
+
+        alert("Data updated in Local Storage");
+      });
+    });
+  </script>
+</body>
+</html>
